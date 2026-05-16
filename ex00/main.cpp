@@ -7,10 +7,10 @@ int main(void) {
     Zombie *zombie = newZombie("Foo");
     zombie->announce();
     delete zombie;
-    randomChump("Bar");
   } catch (const std::bad_alloc &e) {
     std::cerr << e.what() << std::endl;
     return 1;
   }
+  randomChump("Bar");
   return 0;
 }
