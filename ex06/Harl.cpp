@@ -2,6 +2,7 @@
 #include <iostream>
 
 void Harl::debug(void) {
+  std::cout << "[ DEBUG ]" << std::endl;
   std::cout << "I love having extra bacon for my "
                "7XL-double-cheese-triple-pickle-special-ketchup burger. "
                "I really do!"
@@ -9,6 +10,7 @@ void Harl::debug(void) {
 }
 
 void Harl::info(void) {
+  std::cout << "[ INFO ]" << std::endl;
   std::cout << "I cannot believe adding extra bacon costs more money. "
                "You didn't put enough bacon in my burger! If you did, "
                "I wouldn't be asking for more!"
@@ -16,6 +18,7 @@ void Harl::info(void) {
 }
 
 void Harl::warning(void) {
+  std::cout << "[ WARNING ]" << std::endl;
   std::cout << "I think I deserve to have some extra bacon for free."
             << std::endl;
   std::cout << "I've been coming for years, whereas you started working here "
@@ -24,20 +27,34 @@ void Harl::warning(void) {
 }
 
 void Harl::error(void) {
+  std::cout << "[ ERROR ]" << std::endl;
   std::cout << "This is unacceptable! I want to speak to the manager now."
             << std::endl;
 }
 
 void Harl::complain(std::string level) {
-  typedef void (Harl::*Handler)(void);
   const std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-  Handler handlers[4] = {&Harl::debug, &Harl::info, &Harl::warning,
-                         &Harl::error};
+  int index = 0;
 
-  for (int i = 0; i < 4; i++) {
-    if (level == levels[i]) {
-      (this->*handlers[i])();
-      return;
-    }
+  while (index < 4 && level != levels[index])
+    index++;
+
+  switch (index) {
+  case 0:
+    debug();
+    // fall through
+  case 1:
+    info();
+    // fall through
+  case 2:
+    warning();
+    // fall through
+  case 3:
+    error();
+    break;
+  default:
+    std::cout << "[ Probably complaining about insignificant problems ]"
+              << std::endl;
+    break;
   }
 }
