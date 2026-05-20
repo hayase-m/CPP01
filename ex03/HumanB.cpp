@@ -8,7 +8,7 @@ void HumanB::setWeapon(Weapon &weapon) { this->weapon = &weapon; }
 
 void HumanB::attack() {
   if (!weapon) {
-    std::cerr << name << " has no weapon" << std::endl;
+    std::cout << name << " has no weapon" << std::endl;
     return;
   }
   std::cout << name << " attacks with their " << weapon->getType()
